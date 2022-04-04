@@ -69,6 +69,7 @@ def check_BST():
     print('tree is BST:', check_BST_core(root))
 
 
+# https://www.youtube.com/watch?v=i_Q0v_Ct5lY&list=PLOuZYwbmgZWXvkghUyMLdI90IwxbNCiWK&index=19
 def check_BST_core(node, node_min=-100, node_max=100):
     if node is None:
         return True
