@@ -31,12 +31,40 @@ class Node:
             else:
                 return self.right.contains(value)
 
-    def print_in_order(self):
+    def print_in_order_recursive(self):
         if self.left is not None:
-            self.left.print_in_order()
+            self.left.print_in_order_recursive()
         print(self.data)
         if self.right is not None:
-            self.right.print_in_order()
+            self.right.print_in_order_recursive()
+
+    def print_pre_order_recursive(self):
+        print(self.data)
+        if self.left is not None:
+            self.left.print_pre_order_recursive()
+        if self.right is not None:
+            self.right.print_pre_order_recursive()
+
+    def print_in_order_iterative(self): 
+        stack = []
+        current = self
+        while True: 
+          while current: 
+            stack.append(current)
+            current = current.left
+          # print([node.data for node in stack])
+          if stack == []: break
+          current = stack.pop()
+          print(current.data)
+          current = current.right
+
+    def print_pre_order_iterative(self): 
+        stack = [self] 
+        while stack: 
+          current = stack.pop()
+          print(current.data)
+          if current.right: stack.append(current.right) 
+          if current.left: stack.append(current.left) 
 
 
 def build_tree(l=[4, 2, 5, 1, 3, 6]):
@@ -49,7 +77,19 @@ def build_tree(l=[4, 2, 5, 1, 3, 6]):
 def traverse_tree():
     tree = build_tree()
     print('traversing tree in order:')
-    tree.print_in_order()
+    print('recursive:')
+    tree.print_in_order_recursive()
+    print('')
+    print('iterative:')
+    tree.print_in_order_iterative()
+    print('')
+
+    print('traversing tree pre order:')
+    print('recursive:')
+    tree.print_pre_order_recursive()
+    print('')
+    print('iterative:')
+    tree.print_pre_order_iterative()
     print('')
 
 
@@ -82,7 +122,7 @@ def invert_tree():
    tree = build_tree()
    print('')
    print('tree before inversion:')
-   tree.print_in_order()
+   tree.print_in_order_recursive()
 
    print('') 
    print('inverting tree...') 
@@ -90,7 +130,7 @@ def invert_tree():
 
    print('') 
    print('tree after inversion:')
-   tree.print_in_order()
+   tree.print_in_order_recursive()
 
 def get_data(node): 
    return node.data if node else None 
